@@ -2,6 +2,10 @@
 
 ## [0.7.1] – 2025‑12-25
 
+### Added
+
+- Added CI test for Julia 1.12
+
 ### Changed
 
 - `iso8601`/`rfc3339` now allocate fresh strings to avoid shared-buffer aliasing while keeping a single allocation per call.
