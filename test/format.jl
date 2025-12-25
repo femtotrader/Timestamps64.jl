@@ -40,6 +40,30 @@ end
     @test rfc3339(ts) == "2021-02-03T04:05:06.789456123Z"
 end
 
+@testitem "Format: iso8601([ts]) non-shared buffers" begin
+    using Dates
+    using Timestamps64
+
+    str1 = iso8601(Timestamp64(2021, 2, 3))
+    str2 = iso8601(Timestamp64(2021, 2, 4))
+
+    @test str1 == "2021-02-03T00:00:00.000000000"
+    @test str2 == "2021-02-04T00:00:00.000000000"
+    @test str1 !== str2
+end
+
+@testitem "Format: rfc3339([ts]) non-shared buffers" begin
+    using Dates
+    using Timestamps64
+
+    str1 = rfc3339(Timestamp64(2021, 2, 3))
+    str2 = rfc3339(Timestamp64(2021, 2, 4))
+
+    @test str1 == "2021-02-03T00:00:00.000000000Z"
+    @test str2 == "2021-02-04T00:00:00.000000000Z"
+    @test str1 !== str2
+end
+
 @testitem "Format: string([ts])" begin
     using Dates
     using Timestamps64

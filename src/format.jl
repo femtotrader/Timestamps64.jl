@@ -77,6 +77,9 @@ with nanosecond precision.
 """
 Dates.format(timestamp::Timestamp64, ::typeof(RFC3339Timestamp64Format)) = rfc3339(timestamp)
 
+const ISO8601_TEMPLATE = "0000-00-00T00:00:00.000000000"
+const RFC3339_TEMPLATE = "0000-00-00T00:00:00.000000000Z"
+
 """
     iso8601(timestamp::Timestamp64)
 
@@ -94,10 +97,11 @@ julia> iso8601(Timestamp64(2018, 8, 8, 12, 0, 43, nanoseconds=1))
 ```
 """
 function iso8601(ts::Timestamp64)
-    base = "0000-00-00T00:00:00.000000000" # 29 chars
+    base = Base._string_n(29)
 
-    GC.@preserve base begin
+    GC.@preserve base ISO8601_TEMPLATE begin
         ptr = pointer(base)
+        unsafe_copyto!(ptr, pointer(ISO8601_TEMPLATE), 29)
 
         # write date
         y, m, d = Dates.yearmonthday(ts)
@@ -132,10 +136,11 @@ julia> rfc3339(Timestamp64(2018, 8, 8, 12, 0, 43, nanoseconds=1))
 ```
 """
 function rfc3339(ts::Timestamp64)
-    base = "0000-00-00T00:00:00.000000000Z" # 30 chars
+    base = Base._string_n(30)
 
-    GC.@preserve base begin
+    GC.@preserve base RFC3339_TEMPLATE begin
         ptr = pointer(base)
+        unsafe_copyto!(ptr, pointer(RFC3339_TEMPLATE), 30)
 
         # write date
         y, m, d = Dates.yearmonthday(ts)

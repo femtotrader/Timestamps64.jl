@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.7.1] – 2025‑12-25
+
+### Changed
+
+- `iso8601`/`rfc3339` now allocate fresh strings to avoid shared-buffer aliasing while keeping a single allocation per call.
+
 ## [0.7.0] – 2025‑09‑26
 
 ### Added
