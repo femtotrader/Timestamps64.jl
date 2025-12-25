@@ -16,7 +16,7 @@ jobs:
         os:
           - ubuntu-22.04
           - ubuntu-latest
-          - macos-13
+          - macos-15-intel
           - macos-latest
           - windows-2022
           - windows-latest
@@ -24,13 +24,14 @@ jobs:
           - "1.9"
           - "1.10"
           - "1.11"
+          - "1.12"
         include:
           - os: ubuntu-22.04
             os_display: Ubuntu 22.04 (minimum supported)
           - os: ubuntu-latest
             os_display: Ubuntu latest
-          - os: macos-13
-            os_display: macOS 13 (minimum supported on GitHub Actions)
+          - os: macos-15-intel
+            os_display: macOS 15 Intel
           - os: macos-latest
             os_display: macOS latest
           - os: windows-2022
